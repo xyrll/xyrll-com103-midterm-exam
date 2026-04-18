@@ -60,3 +60,31 @@ for i in range(1, 5):
         ])
     else:
         print("Invalid hero number. Please choose 1-5 (or 0 to skip).")
+
+total = len(matches)
+win_rate = int((wins / total) * 100) if total > 0 else 0
+
+best_index = 0
+for i in range(1, total):
+    if matches[i][1] > matches[best_index][1]:
+        best_index = i
+        
+print("\n=============================================")
+print(f"     {InGame_name} -- MATCH LOG ({current_rank})")
+print("=============================================")
+
+for i in range(total):
+    hero, kda, result, tag = matches[i]
+    result_text = "WIN" if result == 'W' else "LOSS"
+    print(f"[{i+1}] {hero:<11} | KDA: {kda:>5.2f} | {result_text:<4} | {tag}")
+
+print("---------------------------------------------")
+print(f"Matches Played : {total}")
+print(f"Wins : {wins}  |  Losses : {losses}")
+print(f"Win Rate       : {win_rate}%")
+
+if total > 0:
+    best = matches[best_index]
+    print(f"Best Match     : [{best_index+1}] {best[0]}  (KDA: {best[1]:.2f})")
+
+print("=============================================")
